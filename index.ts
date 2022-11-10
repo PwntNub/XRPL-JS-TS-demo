@@ -17,11 +17,11 @@ import { derive, sign, utils } from "xrpl-accountlib";
 
 //const secret = "sEdTriaMMLbaWru9eZRbrQhPdMP4Q3v";
 // account = rsDT47FbAU8dwifYoDGrFTEUp6RYta5ZJ4
-const client = new XrplClient("wss://s.altnet.rippletest.net:51233");
+const client = new XrplClient();
 
 const main = async () => {
   if (!utils.isValidAddress(process.argv[2])) {
-    console.log("Account is not invalid!");
+    console.log("Account not found or is invalid!");
     process.exit(1);
   }
 
@@ -36,6 +36,7 @@ const main = async () => {
     process.exit(1);
   }
 
+  console.log("Data ", data);
   console.log("LedgerEntryType: ", data.account_data.LedgerEntryType);
   console.log("Balance: ", data.account_data.Balance / 1000000, " XRP");
   console.log("OwnerCount: ", data.account_data.OwnerCount);
