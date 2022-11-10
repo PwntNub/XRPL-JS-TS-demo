@@ -22,6 +22,18 @@ const client = new XrplClient("wss://s.altnet.rippletest.net:51233");
 
 const main = async () => {
   let account: any;
+  if (isNaN(Number(process.argv[5]))) {
+    console.log("\nPlease enter a valid amount to transfer\n");
+    process.exit(1);
+  }
+  if (process.argv[2] !== "1" && process.argv[2] !== "2") {
+    console.log("\nPlease enter appropriate secret_type from the menu!\n");
+    process.exit(1);
+  }
+  if (!utils.isValidAddress(process.argv[4])) {
+    console.log("\nYou have entered an invalid r-address\n");
+    process.exit(1);
+  }
   if (process.argv[2] === "1") {
     if (!utils.isValidMnemnic(process.argv[3])) {
       console.log("Mnemonic is invalid!");
@@ -41,7 +53,7 @@ const main = async () => {
     account: account.address,
     strict: true,
   });
-  console.log("Data: ", data);
+  // console.log("Data: ", data);
   if (data.error) {
     console.log("Error: ", data.error_message);
     process.exit(1);
@@ -63,8 +75,8 @@ const main = async () => {
     },
     account
   );
-  console.log("id:  ", id);
-  console.log("Signed Transaction:  ", signedTransaction);
+  //console.log("id:  ", id);
+  //console.log("Signed Transaction:  ", signedTransaction);
 
   /*
   if (data.error) {
