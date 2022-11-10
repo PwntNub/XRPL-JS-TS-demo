@@ -79,7 +79,7 @@ const main = async () => {
   //console.log("id:  ", id);
   //console.log("Signed Transaction:  ", signedTransaction);
 
-  const verifyResult = verifySignature();
+  //const verifyResult = verifySignature();
   /*
   if (data.error) {
     console.log("Error: ", data.error_message);
