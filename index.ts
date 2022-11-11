@@ -8,7 +8,7 @@ if (process.argv.length < 6) {
 
 import { XrplClient } from "xrpl-client";
 import { derive, sign, utils } from "xrpl-accountlib";
-import { verifySignature } from "xrpl-accountlib/dist/utils";
+import { verifySignature } from "verify-xrpl-signature";
 
 // Please only do this if you want to build your own platform & sign headless.
 // It's bad practice to add your secret to source code or a config file. In
@@ -76,10 +76,19 @@ const main = async () => {
     },
     account
   );
-  //console.log("id:  ", id);
-  //console.log("Signed Transaction:  ", signedTransaction);
+  console.log("id:  ", id);
+  console.log("Signed Transaction:  ", signedTransaction);
 
-  //const verifyResult = verifySignature();
+  const result = await client.send({
+    command: "submit",
+    tx_blob: signedTransaction,
+  });
+
+  console.log("result ", result);
+
+  //const verifyResult = verifySignature(signedTransaction);
+  //console.log("Verified ", verifyResult);
+
   /*
   if (data.error) {
     console.log("Error: ", data.error_message);
